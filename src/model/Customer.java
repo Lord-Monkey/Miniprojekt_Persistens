@@ -16,13 +16,16 @@ public class Customer {
 	private String type;
 	
 	public Customer() {
+		
+	}
+	
+	public Customer(String name, String address, int zipcode, String city, String mail, String type) {
 		this.name = name;
 		this.address = address;
 		this.zipcode = zipcode;
 		this.city = city;
 		this.mail = mail;
 		this.type = type;
-		
 	}
 
 	public String getName() {
