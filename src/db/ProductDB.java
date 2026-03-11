@@ -13,6 +13,11 @@ import model.Product;
 import model.ProductTypeEnum;
 import model.ProductTypeEnumHelper;
 
+/**
+ * Sends queries to the database and gets a ResultSet back
+ * Uses prepared statements to execute queries
+ * Also implements methods to build new product object through the model layer
+ */
 public class ProductDB implements ProductDBIF {
 
 	private static final String FIND_ALL_Q =
@@ -33,7 +38,14 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 
-
+	/**
+	 * Will access the database with a query made from a prepared statement.
+	 * Receives a ResultSet back from the database.
+	 * Method needs a specified product number of the type int.
+	 * The method then calls another method to build the object, before returning the product
+	 * @param	productNumber	An int to determine which product that needs to be found
+	 * @return					The product found in the database
+	 */
 	public Product findProduct(int productNumber) throws DataAccessException {
 		try {
 			findByPN.setInt(1, productNumber);
@@ -48,8 +60,15 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 
-
-	public List<Product> findAll() {
+	/**
+	 * Will access the database with a query made from a prepared statement.
+	 * Receives a ResultSet back from the database.
+	 * The method will find all the products currently in the database
+	 * The method then calls another method, which handles making a list
+	 * with the results and returns the list.
+	 * @return		An ArrayList with all the products from the database
+	 */
+	public List<Product> findAll() throws DataAccessException {
 		ResultSet rs;
 		try {
 			rs = findAllPS.executeQuery();
@@ -60,11 +79,11 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 
-	public Product buildObject(ResultSet rs) {
+	public Product buildObject(ResultSet rs) throws DataAccessException {
 		Product end = null;
 		String productString, name;
 		int productNumber, minStock, reservedStock;
-		
+
 		try {
 			productString = rs.getString("type"); name = rs.getString("name");
 			productNumber = rs.getInt("productNumber"); minStock = rs.getInt("minStock"); reservedStock = rs.getInt("reservedStock");
@@ -77,6 +96,7 @@ public class ProductDB implements ProductDBIF {
 				String colour = rs.getString("colour");
 				String size = rs.getString("size");
 				Clothing product = new Clothing();
+				product.setProductNumber(productNumber);
 				product.setName(name);
 				product.setMinStock(minStock);
 				product.setReserveQty(reservedStock);
@@ -88,6 +108,7 @@ public class ProductDB implements ProductDBIF {
 				String material = rs.getString("material");
 				String style = rs.getString("style");
 				Equipment product = new Equipment();
+				product.setProductNumber(productNumber);
 				product.setName(name);
 				product.setMinStock(minStock);
 				product.setReserveQty(reservedStock);
@@ -99,6 +120,7 @@ public class ProductDB implements ProductDBIF {
 				String caliber = rs.getString("caliber");
 				String material = rs.getString("material");
 				GunReplica product = new GunReplica();
+				product.setProductNumber(productNumber);
 				product.setName(name);
 				product.setMinStock(minStock);
 				product.setReserveQty(reservedStock);
@@ -106,15 +128,13 @@ public class ProductDB implements ProductDBIF {
 				product.setMaterial(material);
 				end = product;
 			}
-			
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			throw new DataAccessException("Could not identify the type of product found", e);}
 		return end;
 	}
-	
-	public List<Product> buildObjects(ResultSet rs) throws SQLException{
+
+	public List<Product> buildObjects(ResultSet rs) throws SQLException, DataAccessException{
 		List<Product> result = new ArrayList<>();
 		while(rs.next()) {
 			result.add(buildObject(rs));
