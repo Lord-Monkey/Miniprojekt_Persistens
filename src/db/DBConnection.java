@@ -9,12 +9,11 @@ public class DBConnection {
 	private static DBConnection dbConnection;
 
 	private static final String DBNAME = "hildur.ucn.dk";
-	private static final String SERVERNAME = "DMA-CSD-S251_...";
+	private static final String SERVERNAME = "DMA-CSD-S251_10632163";
 	private static final int SERVERPORT = 1433;
-	private static final String USERNAME = "DMA-CSD-S251_...";
+	private static final String USERNAME = "DMA-CSD-S251_10632163";
 	private static final String PASSWORD = "Password1!";
-
-
+	
 	private DBConnection() throws SQLException {
 		this.connection = createConnection();
 	}
