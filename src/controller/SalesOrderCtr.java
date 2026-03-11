@@ -35,11 +35,7 @@ public class SalesOrderCtr {
 	}
 	
 	public void discount(boolean discountGiven) {
-		if (discountGiven) {
-			so.setDiscountGiven(0.1);
-		} else {
-			so.setDiscountGiven(0);
-		}
+		so.setDiscountGiven(discountGiven);
 	}
 	
 	public List<SaleOrder> findAll() {
