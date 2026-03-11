@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 import db.ProductDB;
 import db.ProductDBIF;
+import db.DataAccessException;
 import model.Product;
 
 public class ProductCtr {
@@ -11,7 +12,7 @@ public class ProductCtr {
 	private ProductDBIF prdb;
 	
 	//Constructor
-	public ProductCtr() {
+	public ProductCtr() throws DataAccessException {
 		prdb = new ProductDB();
 	}
 	

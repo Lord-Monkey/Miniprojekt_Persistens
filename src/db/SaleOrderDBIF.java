@@ -7,5 +7,5 @@ import model.SaleOrder;
 public interface SaleOrderDBIF {
 
 	public boolean addOrderToDB(SaleOrder so);
-	public List<SaleOrder> findAll();
+	public List<SaleOrder> findAll() throws DataAccessException;
 }

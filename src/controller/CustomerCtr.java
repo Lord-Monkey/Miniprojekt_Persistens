@@ -7,20 +7,22 @@ import db.DataAccessException;
 import model.Customer;
 
 public class CustomerCtr {
-
+	//Fields
 	private Customer c;
 	private CustomerDBIF cdb;
 	
+	//Constructor
 	public CustomerCtr() throws DataAccessException {
 		cdb = new CustomerDB();
 	}
 	
+	//Methods
 	public Customer findCustomer(String mail) throws DataAccessException {
-		Customer c = cdb.findCustomer();
+		c = cdb.findCustomer(mail);
 		return c;
 	}
 	
-	public List<Customer> findAll(){
-		return cdb.findAllCustomer();
+	public List<Customer> findAll() throws DataAccessException{
+		return cdb.findAll();
 	}
 }
