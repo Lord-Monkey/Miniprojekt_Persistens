@@ -26,12 +26,12 @@ public class SalesOrderCtr {
 		return new SaleOrder();
 	}
 	
-	public Customer enterCustomer(String email) {
-		return cctr.findCustomer(email);
+	public Customer enterCustomer(String mail) throws DataAccessException {
+		return cctr.findCustomer(mail);
 	}
 	
-	public Product enterProduct(int id, int quantity) {
-		return pctr.findProduct(id);
+	public Product enterProduct(int productNumber, int quantity) {
+		return pctr.findProduct(productNumber);
 	}
 	
 	public void discount(boolean discountGiven) {
