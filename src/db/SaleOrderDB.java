@@ -42,11 +42,15 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			throw new DataAccessException("Couldn't find all saleorders", e);
 		}
 	}
-		
 	
-	
-	private List<SaleOrder> buildObjects(ResultSet rs){
-		
+	private List<SaleOrder> buildObjects(ResultSet rs) throws SQLException {
+		List<SaleOrder> foundSaleOrder = new java.util.ArrayList<SaleOrder>();
+		SaleOrder tempSaleOrder = null;
+		while(rs.next()) {
+			tempSaleOrder = buildObject(rs);
+			foundSaleOrder.add(tempSaleOrder);
+		}
+		return foundSaleOrder;
 	}
 	
 	private SaleOrder buildObject(ResultSet rs) {
@@ -55,5 +59,11 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	
 	public boolean insert(SaleOrder so) {
 		
+	}
+
+	@Override
+	public boolean addOrderToDB(SaleOrder so) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
