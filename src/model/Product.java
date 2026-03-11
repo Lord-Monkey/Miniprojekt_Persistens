@@ -2,11 +2,13 @@ package model;
 
 public abstract class Product {
 	
+	//Fields
 	private int productNumber;
 	private String name;
 	private int minStock;
 	private int reserveQty;
 	
+	//Constructors
 	public Product(int productNumber, String name, int minStock, int reserveQty){
 		this.productNumber = productNumber;
 		this.name = name;
@@ -17,7 +19,8 @@ public abstract class Product {
 	public Product() {
 		
 	}
-
+	
+	//Methods
 	public int getProductNumber() {
 		return productNumber;
 	}
