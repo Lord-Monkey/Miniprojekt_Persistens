@@ -45,8 +45,8 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		
 	
 	
-	private List<SaleOrder> buildObjects(ResultSet rs){
-		
+	private List<SaleOrder> buildObjects(ResultSet rs) throws SQLException {
+	    
 	}
 	
 	private SaleOrder buildObject(ResultSet rs) {
@@ -55,5 +55,11 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	
 	public boolean insert(SaleOrder so) {
 		
+	}
+
+	@Override
+	public boolean addOrderToDB(SaleOrder so) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
