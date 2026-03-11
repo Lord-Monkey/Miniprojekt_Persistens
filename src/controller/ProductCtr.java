@@ -11,7 +11,7 @@ public class ProductCtr {
 	private ProductDBIF prdb;
 	
 	//Constructor
-	public ProductCtr() {
+	public ProductCtr() throws DataAccessException {
 		prdb = new ProductDB();
 	}
 	
