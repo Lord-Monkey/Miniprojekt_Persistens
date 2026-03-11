@@ -1,10 +1,12 @@
 package model;
 
 public class Clothing extends Product{
-
+		
+		//Fields
 		private String size;
 		private String colour;
 		
+		//Constructors
 		public Clothing() {
 			super();
 		}
@@ -14,6 +16,7 @@ public class Clothing extends Product{
 			
 		}
 
+		//Methods
 		public String getSize() {
 			return size;
 		}

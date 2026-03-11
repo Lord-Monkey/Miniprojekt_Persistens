@@ -2,9 +2,11 @@ package model;
 
 public class Equipment extends Product{
 
+	//Fields
 	private String material;
 	private String style;
 	
+	//Constructors
 	public Equipment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -13,6 +15,8 @@ public class Equipment extends Product{
 		super(productNumber, name, minStock, reserveQty);
 		// TODO Auto-generated constructor stub
 	}
+	
+	//Methods
 	public String getMaterial() {
 		return material;
 	}
