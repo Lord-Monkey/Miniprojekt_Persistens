@@ -2,9 +2,9 @@ package model;
 
 public enum ProductTypeEnum {
 
-	Clothing,
-	Equipment,
-	GunReplica,
-	NotSet;
+	CLOTHING,
+	EQUIPMENT,
+	GUNREPLICA,
+	NOTSET;
 	
 }

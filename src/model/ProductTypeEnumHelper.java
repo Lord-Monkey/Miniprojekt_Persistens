@@ -3,13 +3,13 @@ package model;
 public class ProductTypeEnumHelper {
 
 	public ProductTypeEnum buildEnum(String enumString) {
-		ProductTypeEnum ptEnum = ProductTypeEnum.NotSet;
+		ProductTypeEnum ptEnum = ProductTypeEnum.NOTSET;
 		if(enumString != null) {
 			String upperEnumString = enumString.toUpperCase();
 			try {
 				ptEnum = ProductTypeEnum.valueOf(upperEnumString);
 			} catch (IllegalArgumentException e) {
-				ptEnum = ProductTypeEnum.NotSet;
+				ptEnum = ProductTypeEnum.NOTSET;
 			}
 		}
 		return ptEnum;

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Product;
+import model.ProductTypeEnum;
+import model.ProductTypeEnumHelper;
 
 public class ProductDB implements ProductDBIF {
 
@@ -54,6 +56,26 @@ public class ProductDB implements ProductDBIF {
 	}
 
 	public Product buildObject(ResultSet rs) {
-		Product p = new Product();
+		String productString, name;
+		int productNumber, minStock, reservedStock;
+		try {
+			productString = rs.getString("type"); name = rs.getString("name");
+			productNumber = rs.getInt("productNumber"); minStock = rs.getInt("minStock"); reservedStock = rs.getInt("reservedStock");
+			
+			
+			ProductTypeEnumHelper pteh = new ProductTypeEnumHelper();
+			ProductTypeEnum ptEnum = pteh.buildEnum(productString);
+			
+			switch(ptEnum) {
+			case CLOTHING -> Clothing product = clothing():
+			case EQUIPMENT -> Equipment product = new Equipment():
+			case GUNREPLICA -> GUNREPLICA product = new GunReplica():
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
