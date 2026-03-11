@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 import db.ProductDB;
 import db.ProductDBIF;
+import db.DataAccessException;
 import model.Product;
 
 public class ProductCtr {
