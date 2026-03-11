@@ -16,11 +16,11 @@ public class CustomerCtr {
 	}
 	
 	public Customer findCustomer(String mail) throws DataAccessException {
-		Customer c = cdb.findCustomer();
+		c = cdb.findCustomer(mail);
 		return c;
 	}
 	
-	public List<Customer> findAll(){
-		return cdb.findAllCustomer();
+	public List<Customer> findAll() throws DataAccessException{
+		return cdb.findAll();
 	}
 }
