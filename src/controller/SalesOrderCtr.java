@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 import db.SaleOrderDB;
 import db.SaleOrderDBIF;
+import db.DataAccessException;
 import model.Customer;
 import model.Product;
 import model.SaleOrder;
@@ -22,7 +23,7 @@ public class SalesOrderCtr {
 	}
 	
 	//Methods
-	public SaleOrder createSaleOrder() {
+	public SaleOrder createSaleOrder() throws DataAccessException {
 		return new SaleOrder();
 	}
 	
