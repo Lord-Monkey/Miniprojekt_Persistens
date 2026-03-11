@@ -2,24 +2,25 @@ package controller;
 
 import java.util.List;
 import db.ProductDB;
+import db.ProductDBIF;
 import model.Product;
 
 public class ProductCtr {
 	//Fields
 	private Product p;
-	private ProductDB productDBIF;
+	private ProductDBIF prdb;
 	
 	//Constructor
 	public ProductCtr() {
-		productDBIF = new ProductDB();
+		prdb = new ProductDB();
 	}
 	
 	//Methods
-	public Product findProduct(int id) {
-		return productDBIF.findProduct(id);
+	public Product findProduct(int productNumber) {
+		return prdb.findProduct(productNumber);
 	}
 	
 	public List<Product> findAllProducts() {
-		return productDBIF.findAllProducts();
+		return prdb.findAll();
 	}
 }
