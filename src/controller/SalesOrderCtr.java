@@ -22,7 +22,7 @@ public class SalesOrderCtr {
 	}
 	
 	//Methods
-	public SaleOrder createSaleOrder() {
+	public SaleOrder createSaleOrder() throws DataAccessException {
 		return new SaleOrder();
 	}
 	
