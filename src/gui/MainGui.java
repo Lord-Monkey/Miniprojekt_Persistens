@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
+import ui.OpenOrderGUI;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -79,6 +81,8 @@ public class MainGui extends JFrame {
 	}
 
 	private void openOrders() {
-		
-	}
+			SaleOrderGui sog = new SaleOrderGui();
+			sog.setLocationRelativeTo(sog);
+			sog.setVisible(true);
+		}
 }
