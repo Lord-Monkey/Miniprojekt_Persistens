@@ -20,7 +20,6 @@ public class Test {
 		if(pctr != null) {
 			System.out.println("pctr works");
 		}
-		}
 	}
-
+	}
 }
