@@ -8,17 +8,16 @@ import java.util.ArrayList;
 
 import model.OrderLineItem;
 import model.Product;
-import model.SaleOrder;
 
 public class OrderLineItemDB implements OrderLineItemDBIF {
 	//Fields
-	private static final String FIND_ALL_Q = "select id, orderId, productNumber, quantity"
-			+ "From OrderLineItem";
+	private static final String FIND_ALL_Q = "SELECT orderId, productId, quantity "
+			+ "From OrderLineItem WHERE orderId = ?";
 	private PreparedStatement findAllPS;
 	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productID, orderID) values "
 			+ "(?, "
-			+ "(SELECT ID FROM Product WHERE productNumber = ?), "
-			+ "(SELECT ID FROM SaleOrder WHERE orderNO = ?)";
+			+ "(SELECT id FROM Product WHERE productNumber = ?), "
+			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?)";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
 	
@@ -50,9 +49,10 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	}
 
 	@Override
-	public List<OrderLineItem> findOrderLinesByOrderNo(SaleOrder orderNo) throws DataAccessException {
+	public List<OrderLineItem> findOrderLinesByOrderNo(int orderNo) throws DataAccessException {
 		ResultSet rs;
 		try {
+			findAllPS.setInt(1, orderNo);
 			rs = findAllPS.executeQuery();
 			List<OrderLineItem> res = buildObjects(rs);
 			return res;

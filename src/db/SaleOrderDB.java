@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Customer;
+import model.OrderLineItem;
 import model.SaleOrder;
 
 /**
@@ -30,11 +31,14 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	
 	private CustomerDBIF customerDB;
 	
+	private OrderLineItemDBIF oliDB;
+	
 	public SaleOrderDB() throws DataAccessException{
 		try {
 			findAllPS = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL_Q);
 			INSERT_PS = DBConnection.getInstance().getConnection().prepareStatement(INSERT_Q);
 			customerDB = new CustomerDB();
+			oliDB = new OrderLineItemDB();
 		} catch (SQLException e) {
 			throw new DataAccessException("Connection issue", e);
 		}
@@ -73,6 +77,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 				boolean discountGiven = rs.getBoolean("discountGiven");
 				String tempMail = rs.getString("mail");
 				Customer c = customerDB.findCustomer(tempMail);
+				List<OrderLineItem> oli = oliDB.findOrderLinesByOrderNo(orderNo);
 				
 				so.setOrderNo(orderNo);
 				so.setDate(deliveryDate);
@@ -80,6 +85,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 				so.setDeliveryDate(deliveryDate);
 				so.setDiscountGiven(discountGiven);
 				so.setCustomer(c);
+				so.setOrderLines(oli);
 				
 				
 				
