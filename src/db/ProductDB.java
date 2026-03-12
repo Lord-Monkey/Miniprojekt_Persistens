@@ -79,7 +79,7 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 
-	public Product buildObject(ResultSet rs) throws DataAccessException {
+	private Product buildObject(ResultSet rs) throws DataAccessException {
 		Product end = null;
 		String productString, name;
 		int productNumber, minStock, reservedStock;
@@ -134,7 +134,7 @@ public class ProductDB implements ProductDBIF {
 		return end;
 	}
 
-	public List<Product> buildObjects(ResultSet rs) throws SQLException, DataAccessException{
+	private List<Product> buildObjects(ResultSet rs) throws SQLException, DataAccessException{
 		List<Product> result = new ArrayList<>();
 		while(rs.next()) {
 			result.add(buildObject(rs));
