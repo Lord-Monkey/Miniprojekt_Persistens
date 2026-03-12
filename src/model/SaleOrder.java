@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SaleOrder {
 
@@ -11,7 +12,7 @@ public class SaleOrder {
 	private LocalDate deliveryDate;
 	private boolean discountGiven;
 	private Customer c;
-	private ArrayList<OrderLineItem> orderLines;
+	private List<OrderLineItem> orderLines;
 	
 	public SaleOrder() {
 		orderLines = new ArrayList<>();
@@ -72,5 +73,9 @@ public class SaleOrder {
 	public void addOrderLine(Product p, int quantity) {
 		OrderLineItem oli = new OrderLineItem(p, quantity);
 		orderLines.add(oli);
+	}
+	
+	public void setOrderLines(List<OrderLineItem> orderLines) {
+		this.orderLines = orderLines;
 	}
 }
