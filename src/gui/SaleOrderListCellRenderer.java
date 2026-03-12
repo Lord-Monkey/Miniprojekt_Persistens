@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+import model.OrderLineItem;
 import model.SaleOrder;
 
 public class SaleOrderListCellRenderer implements ListCellRenderer<SaleOrder> {
@@ -15,7 +16,13 @@ public class SaleOrderListCellRenderer implements ListCellRenderer<SaleOrder> {
 	@Override
 	public Component getListCellRendererComponent(JList<? extends SaleOrder> list, SaleOrder order, int index, 
 			boolean isSelected, boolean cellHasFocus) {
-		JLabel renderer = (JLabel) dlcr.getListCellRendererComponent(list, order.getOrderNo(), index, isSelected, cellHasFocus);
+		JLabel renderer = (JLabel) dlcr.getListCellRendererComponent(list, createStringForView(order), index, isSelected, cellHasFocus);
 		return renderer;
+	}
+	
+	private String createStringForView(SaleOrder order) {
+		
+		String text = order.getOrderNo() + "   " + order.getCustomer().getName() + "   " + order.getDeliveryStatus();
+		return text;
 	}
 }

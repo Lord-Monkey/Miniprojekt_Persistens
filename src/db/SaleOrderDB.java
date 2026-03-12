@@ -76,7 +76,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	private SaleOrder buildObject(ResultSet rs) throws DataAccessException{
 		SaleOrder so = null;
 		try {
-			if(rs.next()) {
+//			if(rs.next()) {
 				so = new SaleOrder();
 				int orderNo = rs.getInt("orderNo");
 				LocalDate date = rs.getDate("orderDate").toLocalDate();
@@ -94,7 +94,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 				so.setDiscountGiven(discountGiven);
 				so.setCustomer(c);
 				so.setOrderLines(oli);
-			}
+//			}
 	} catch(SQLException e1) {
 		throw new DataAccessException("Kunne ikke finde ordren", e1);
 	}
