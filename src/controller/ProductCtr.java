@@ -18,7 +18,8 @@ public class ProductCtr {
 	
 	//Methods
 	public Product findProduct(int productNumber) throws DataAccessException {
-		return prdb.findProduct(productNumber);
+		p = prdb.findProduct(productNumber);
+		return p;
 	}
 	
 	public List<Product> findAllProducts() throws DataAccessException {
