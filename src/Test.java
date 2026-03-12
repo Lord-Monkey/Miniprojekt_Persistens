@@ -19,11 +19,11 @@ public class Test {
 		SaleOrderDB sodb = new SaleOrderDB();
 		List<SaleOrder> sol = sodb.findAll();
 		SaleOrder 
-//		so = sol.get(0);
-		so = sodb.findOrderByOrderNo(1);
+		so = sol.get(0);
+//		so = sodb.findOrderByOrderNo(1);
 		
 		System.out.println(sol.size());
-		System.out.println(so.getCustomer());
+		System.out.println(so.getCustomer().getName());
 		System.out.println(so.getOrderNo());
 		System.out.println(so.getDate());
 		System.out.println(so.getDeliveryStatus());
