@@ -14,10 +14,12 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	private static final String FIND_ALL_Q = "select id, orderId, productNumber, quantity"
 			+ "From OrderLineItem";
 	private PreparedStatement findAllPS;
-	private static final String INSERT_Q = "insert into OrderLineItem (orderId, productId, quantity) values (?, ?, ?)";
+	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productID, orderID) values "
+			+ "(?, "
+			+ "(SELECT ID FROM Product WHERE productNumber = ?), "
+			+ "(SELECT ID FROM SaleOrder WHERE orderNO = ?)";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
-	private ArrayList<OrderLineItem> orderLineItems;
 	
 	public OrderLineItemDB() throws DataAccessException {
 		try {
@@ -31,18 +33,19 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 
 	@Override
 	public Boolean insert(OrderLineItem oli, int orderNo) throws DataAccessException {
+		boolean result = false;
 		try {
-			
-			INSERT_PS.setInt(1, oli.getProduct().getProductNumber());
-			INSERT_PS.setInt(2, oli.getQuantity());
+			INSERT_PS.setInt(1, oli.getQuantity());
+			INSERT_PS.setInt(2, oli.getProduct().getProductNumber());
+			INSERT_PS.setInt(3, orderNo);
 			int res = INSERT_PS.executeUpdate();
 			if(res > 0) {
-				return true;
+				result = true;
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Couldn't insert order line item", e);
 		}
-		return 	null;
+		return	result;
 	}
 
 	@Override

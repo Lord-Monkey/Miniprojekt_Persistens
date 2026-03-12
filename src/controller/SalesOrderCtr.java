@@ -16,7 +16,7 @@ public class SalesOrderCtr {
 	private SaleOrderDBIF sodb;
 	
 	//Constructor
-	public SalesOrderCtr() {
+	public SalesOrderCtr() throws DataAccessException {
 		cctr = new CustomerCtr();
 		pctr = new ProductCtr();
 		sodb = new SaleOrderDB();
@@ -31,15 +31,15 @@ public class SalesOrderCtr {
 		return cctr.findCustomer(mail);
 	}
 	
-	public Product enterProduct(int productNumber, int quantity) {
+	public Product enterProduct(int productNumber, int quantity) throws DataAccessException {
 		return pctr.findProduct(productNumber);
 	}
 	
-	public void discount(boolean discountGiven) {
+	public void discount(boolean discountGiven) throws DataAccessException {
 		so.setDiscountGiven(discountGiven);
 	}
 	
-	public List<SaleOrder> findAll() {
+	public List<SaleOrder> findAll() throws DataAccessException {
 		return sodb.findAll();
 	}
 }
