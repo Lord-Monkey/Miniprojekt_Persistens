@@ -20,16 +20,21 @@ import model.SaleOrder;
  */
 public class SaleOrderDB implements SaleOrderDBIF {
 	
-	private static final String FIND_ALL_Q = "select orderNo, orderDate, deliveryStatus, deliveryDate,"
-            + " discountGiven, mail from SaleOrder, Customer cdb WHERE customerId = cdb.id";
+	private static final String FIND_ALL_Q = "SELECT orderNo, orderDate, deliveryStatus, deliveryDate,"
+            + " discountGiven, mail FROM SaleOrder, Customer cdb WHERE customerId = cdb.id";
 	
 	private PreparedStatement findAllPS;
 	
-	private static final String INSERT_Q = "insert into SaleOrder(orderNo, orderDate, deliveryStatus,"
+	private static final String INSERT_Q = "INSERT INTO SaleOrder(orderNo, orderDate, deliveryStatus,"
 			+ " deliveryDate, discountGiven, freightID, customerID, invoiceID)"
 			+ " VALUES(?, ?, ?, ?, ?, 1, (SELECT id FROM Customer WHERE mail = ?), 1)";
 	
 	private PreparedStatement INSERT_PS;
+	
+	private static final String FIND_BY_ORDERNO_Q = "SELECT orderNo, orderDate, deliveryStatus, deliveryDate,"
+			+ " discountGiven, mail FROM SaleOrder WHERE orderNo = ?";
+	
+	private PreparedStatement findOrderNoPS;
 	
 	private CustomerDBIF customerDB;
 	
@@ -39,6 +44,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		try {
 			findAllPS = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL_Q);
 			INSERT_PS = DBConnection.getInstance().getConnection().prepareStatement(INSERT_Q);
+			findOrderNoPS = DBConnection.getInstance().getConnection().prepareStatement(FIND_BY_ORDERNO_Q);
 			customerDB = new CustomerDB();
 			oliDB = new OrderLineItemDB();
 		} catch (SQLException e) {
@@ -120,8 +126,18 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	}
 
 	@Override
-	public List<SaleOrder> findOrderByOrderNo(SaleOrder orderNo) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public SaleOrder findOrderByOrderNo(int orderNo) throws DataAccessException {
+		ResultSet rs;
+		try {
+			findOrderNoPS.setInt(1, orderNo);
+			rs = findOrderNoPS.executeQuery();
+			SaleOrder so = null;
+			if(rs.next()) {
+				so = buildObject(rs);
+			}
+			return so;
+		} catch(SQLException e) {
+			throw new DataAccessException("Couldn't find all saleorders", e);
+		}
 	}
 }
