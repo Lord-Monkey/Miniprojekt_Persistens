@@ -14,7 +14,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	private static final String FIND_ALL_Q = "select id, orderId, productNumber, quantity"
 			+ "From OrderLineItem";
 	private PreparedStatement findAllPS;
-	private static final String INSERT_Q = "INSERT INTO OrderLineItem (orderId, productId, quantity) values "
+	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productId, orderId) values "
 			+ "(?, "
 			+ "(SELECT Id FROM Product WHERE productNumber = ?), "
 			+ "(SELECT Id FROM SaleOrder WHERE orderNo = ?)";
