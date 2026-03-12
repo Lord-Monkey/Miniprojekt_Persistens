@@ -10,6 +10,6 @@ public interface SaleOrderDBIF {
 	
 	List<SaleOrder> findAll() throws DataAccessException;
 
-	List<SaleOrder> findOrderByOrderNo(SaleOrder orderNo) throws DataAccessException;
+	SaleOrder findOrderByOrderNo(int orderNo) throws DataAccessException;
 
 }
