@@ -12,9 +12,11 @@ public class GunReplica extends Product{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GunReplica(int productNumber, String name, int minStock, int reserveQty) {
+	public GunReplica(int productNumber, String name, int minStock, int reserveQty,
+			String caliber, String material) {
 		super(productNumber, name, minStock, reserveQty);
-		// TODO Auto-generated constructor stub
+		this.caliber = caliber;
+		this.material = material;
 	}
 	
 	//Methods
