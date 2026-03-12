@@ -20,7 +20,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?)";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
-	
+
 	public OrderLineItemDB() throws DataAccessException {
 		try {
 			findAllPS = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL_Q);
@@ -60,7 +60,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 			throw new DataAccessException("Couldn't find all order line items", e);
 		}
 	}
-	
+
 	private List<OrderLineItem> buildObjects(ResultSet rs) throws Exception {
 		List<OrderLineItem> foundOrderLineItems = new ArrayList<OrderLineItem>();
 		OrderLineItem tempOrderLineItem = null;
@@ -70,7 +70,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 		}
 		return foundOrderLineItems;
 	}
-	
+
 	private OrderLineItem buildObject(ResultSet rs) throws SQLException, DataAccessException {
 		Product p;
 		int quantity;
