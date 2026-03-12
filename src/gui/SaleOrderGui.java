@@ -67,7 +67,7 @@ public class SaleOrderGui extends JFrame {
 		JButton btnNewOrder = new JButton("Ny ordre");
 		panel.add(btnNewOrder, "cell 0 3");
 		
-		lstSaleOrder = new JList();
+		lstSaleOrder = new JList<>();
 		lstSaleOrder.setCellRenderer(new SaleOrderListCellRenderer());
 		scrollPane.setViewportView(lstSaleOrder);
 
