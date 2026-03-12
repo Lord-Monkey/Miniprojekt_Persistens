@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import model.OrderLineItem;
 import model.SaleOrder;
 
 public class SaleOrderListCellRenderer implements ListCellRenderer<SaleOrder> {
@@ -21,8 +20,9 @@ public class SaleOrderListCellRenderer implements ListCellRenderer<SaleOrder> {
 	}
 	
 	private String createStringForView(SaleOrder order) {
-		
-		String text = order.getOrderNo() + "   " + order.getCustomer().getName() + "   " + order.getDeliveryStatus();
+		String text = order.getOrderNo() + "      " + order.getCustomer().getName() + "      " + order.getDeliveryStatus();
 		return text;
 	}
+	
+	
 }

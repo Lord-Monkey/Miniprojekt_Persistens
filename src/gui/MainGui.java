@@ -81,7 +81,7 @@ public class MainGui extends JFrame {
 
 	private void openOrders() {
 			SaleOrderGui sog = new SaleOrderGui();
-			sog.setLocationRelativeTo(sog);
+			sog.setLocation(200, 200);
 			sog.setVisible(true);
 		}
 }

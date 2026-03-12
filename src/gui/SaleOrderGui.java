@@ -20,6 +20,11 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.FlowLayout;
 
 public class SaleOrderGui extends JFrame {
 	private SalesOrderCtr soCtr;
@@ -63,11 +68,29 @@ public class SaleOrderGui extends JFrame {
 		panel.setLayout(new MigLayout("", "[]", "[][][][][][][][][][][][][]"));
 		
 		JButton btnNewOrder = new JButton("Ny ordre");
+		btnNewOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openNewOrder();
+			}
+		});
 		panel.add(btnNewOrder, "cell 0 3");
 		
 		lstSaleOrder = new JList<>();
 		lstSaleOrder.setCellRenderer(new SaleOrderListCellRenderer());
 		scrollPane.setViewportView(lstSaleOrder);
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.SOUTH);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		panel_1.add(btnCancel);
 
 		init();
 	}
@@ -92,5 +115,11 @@ public class SaleOrderGui extends JFrame {
 		} catch (DataAccessException e) {
 			JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
 		}
+	}
+	
+	private void openNewOrder() {
+		NewSaleGui nsg = new NewSaleGui();
+		nsg.setVisible(true);
+		nsg.setLocation(300, 300);
 	}
 }
