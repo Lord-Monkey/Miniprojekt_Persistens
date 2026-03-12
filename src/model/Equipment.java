@@ -11,9 +11,11 @@ public class Equipment extends Product{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Equipment(int productNumber, String name, int minStock, int reserveQty) {
+	public Equipment(int productNumber, String name, int minStock, int reserveQty,
+			String material, String style) {
 		super(productNumber, name, minStock, reserveQty);
-		// TODO Auto-generated constructor stub
+		this.material = material;
+		this.style = style;
 	}
 	
 	//Methods
