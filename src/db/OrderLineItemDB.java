@@ -11,13 +11,13 @@ import model.Product;
 
 public class OrderLineItemDB implements OrderLineItemDBIF {
 	//Fields
-	private static final String FIND_ALL_Q = "SELECT orderId, productId, quantity"
+	private static final String FIND_ALL_Q = "SELECT orderId, productId, quantity "
 			+ "From OrderLineItem WHERE orderId = ?";
 	private PreparedStatement findAllPS;
 	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productID, orderID) values "
 			+ "(?, "
-			+ "(SELECT ID FROM Product WHERE productNumber = ?), "
-			+ "(SELECT ID FROM SaleOrder WHERE orderNO = ?)";
+			+ "(SELECT id FROM Product WHERE productNumber = ?), "
+			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?)";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
 	
