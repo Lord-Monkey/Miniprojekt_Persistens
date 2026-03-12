@@ -53,7 +53,7 @@ public class MainGui extends JFrame {
 		panel_Center.setLayout(new MigLayout("", "[85px][85px]", "[21px][][][][][][]"));
 		
 		JButton btnOrders = new JButton("Ordrer");
-		btnOrders.setMargin(new Insets(2, 31, 2, 31));
+		btnOrders.setMargin(new Insets(2, 33, 2, 32));
 		btnOrders.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openOrders();
@@ -63,15 +63,15 @@ public class MainGui extends JFrame {
 		panel_Center.add(btnOrders, "cell 0 1,alignx left,aligny top");
 		
 		JButton btn_Customer = new JButton("Kunder");
-		btn_Customer.setMargin(new Insets(2, 30, 2, 30));
+		btn_Customer.setMargin(new Insets(2, 31, 2, 30));
 		panel_Center.add(btn_Customer, "cell 0 2");
 		
 		JButton btn_Products = new JButton("Produkter");
-		btn_Products.setMargin(new Insets(2, 24, 2, 24));
+		btn_Products.setMargin(new Insets(2, 23, 2, 23));
 		panel_Center.add(btn_Products, "cell 0 3");
 		
 		JButton btn_Notifications = new JButton("Notifikationer");
-		btn_Notifications.setMargin(new Insets(2, 16, 2, 16));
+		btn_Notifications.setMargin(new Insets(2, 13, 2, 13));
 		panel_Center.add(btn_Notifications, "cell 0 4,alignx left,aligny top");
 		
 		JPanel panel_South = new JPanel();
