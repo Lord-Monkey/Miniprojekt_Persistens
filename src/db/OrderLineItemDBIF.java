@@ -3,7 +3,6 @@ package db;
 import java.util.List;
 
 import model.OrderLineItem;
-import model.SaleOrder;
 
 public interface OrderLineItemDBIF {
 	

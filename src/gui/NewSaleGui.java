@@ -6,10 +6,30 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Customer;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
 public class NewSaleGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnCustomer;
+	private JLabel lblShowCustomer;
+	private Customer customer;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -36,7 +56,93 @@ public class NewSaleGui extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_South = new JPanel();
+		contentPane.add(panel_South, BorderLayout.SOUTH);
+		panel_South.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		
+		JButton btnCreate = new JButton("Opret");
+		btnCreate.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_South.add(btnCreate);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			dispose();
+			}
+		});
+		btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_South.add(btnCancel);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.EAST);
+		panel.setLayout(new MigLayout("", "[]", "[][][]"));
+		
+		btnCustomer = new JButton("Tilføj kunde");
+		btnCustomer.setMargin(new Insets(2, 18, 2, 19));
+		btnCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addCustomerToOffer();
+			}
+		});
+		
+		lblShowCustomer = new JLabel("Ingen kunde valgt");
+		panel.add(lblShowCustomer, "cell 0 0");
+		panel.add(btnCustomer, "cell 0 1");
+		
+		JButton btnProduct = new JButton("Tilføj produkt");
+		panel.add(btnProduct, "cell 0 2");
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 
 	}
 
+	private void addCustomerToOffer() {
+		AddCustomer addCustomer = new AddCustomer();
+		addCustomer.setLocation(400, 400);
+		addCustomer.setVisible(true);
+
+		customer = addCustomer.getSelectedCustomer();
+
+		if (customer != null) {
+			lblShowCustomer.setText(customer.getName() + " (" + customer.getMail() + ")");
+			btnCustomer.setText("Ændr kunde");		}
+		else {
+			System.out.println("Ingen kunde valgt");
+		}
+	}
+	
+	private void createSale() {
+		// Checks if a customer have been added to the offer
+		if (lblShowCustomer.getText().equals("Ingen kunde valgt")) {
+			javax.swing.JOptionPane.showMessageDialog(
+					this,
+					"Tilføj venligst en kunde til tilbuddet",
+					"Manglende kunde",
+					javax.swing.JOptionPane.WARNING_MESSAGE
+					);
+			return;
+		}
+
+		// Checks if at least one product have been added to the offer
+		else if (table.getRowCount() == 0) {
+			javax.swing.JOptionPane.showMessageDialog(
+					this,
+					"Tilføj venligst mindst ét produkt til tilbuddet",
+					"Manglende produkt",
+					javax.swing.JOptionPane.WARNING_MESSAGE
+					);
+			return;
+		}
+
+		
+	}
 }

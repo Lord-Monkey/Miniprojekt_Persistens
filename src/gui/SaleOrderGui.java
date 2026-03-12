@@ -21,9 +21,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 
 public class SaleOrderGui extends JFrame {
