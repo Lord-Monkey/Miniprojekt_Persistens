@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +25,9 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	
 	private PreparedStatement findAllPS;
 	
-	private static final String INSERT_Q = "insert into SaleOrder(orderNo, date, deliveryStatus,"
-			+ " deliveryDate, discountGiven, c, orderLineItem)";
+	private static final String INSERT_Q = "insert into SaleOrder(orderNo, orderDate, deliveryStatus,"
+			+ " deliveryDate, discountGiven, freightID, customerID, invoiceID)"
+			+ " VALUES(?, ?, ?, ?, ?, 1, (SELECT id FROM Customer WHERE mail = ?), 1)";
 	
 	private PreparedStatement INSERT_PS;
 	
@@ -55,7 +57,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		}
 	}
 	
-	private List<SaleOrder> buildObjects(ResultSet rs) throws SQLException {
+	private List<SaleOrder> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<SaleOrder> foundSaleOrder = new ArrayList<SaleOrder>();
 		SaleOrder tempSaleOrder = null;
 		while(rs.next()) {
@@ -86,29 +88,40 @@ public class SaleOrderDB implements SaleOrderDBIF {
 				so.setDiscountGiven(discountGiven);
 				so.setCustomer(c);
 				so.setOrderLines(oli);
-				
-				
-				
-//				if(fullAssociation) {
-//					List<SaleOrder> saleOrders = saleOrderDBIF.findOrderByOrderNo(so.getOrderNo());
-//					so.setOrderNo(saleOrders)
-//				}
 			}
 	} catch(SQLException e1) {
-		throw new DataAccessException("Kunne ikke finde ordren");
+		throw new DataAccessException("Kunne ikke finde ordren", e1);
 	}
 	return so;
 	}
 	
 
-	
-	public boolean insert(SaleOrder so) {
-		
+	@Override
+	public boolean insert(SaleOrder so) throws DataAccessException {
+		boolean result = false;
+		try {
+			INSERT_PS.setInt(1, so.getOrderNo());
+			INSERT_PS.setDate(2, Date.valueOf(so.getDate()));
+			INSERT_PS.setString(3, so.getDeliveryStatus());
+			INSERT_PS.setDate(4, Date.valueOf(so.getDeliveryDate()));
+			INSERT_PS.setBoolean(5, so.getDiscountGiven());
+			INSERT_PS.setString(6, so.getCustomer().getMail());
+			for(OrderLineItem oli : so.getOrderLines()) {
+				oliDB.insert(oli, so.getOrderNo());
+			}
+			int res = INSERT_PS.executeUpdate();
+			if(res > 0) {
+				result = true;
+			}
+		} catch(SQLException e) {
+			throw new DataAccessException("Couldn't insert order", e);
+		}
+		return result;
 	}
 
 	@Override
-	public boolean addOrderToDB(SaleOrder so) {
+	public List<SaleOrder> findOrderByOrderNo(SaleOrder orderNo) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 }

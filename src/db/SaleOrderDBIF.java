@@ -6,7 +6,7 @@ import model.SaleOrder;
 
 public interface SaleOrderDBIF {
 
-	public boolean addOrderToDB(SaleOrder so);
+	public boolean insert(SaleOrder so) throws DataAccessException;
 	
 	List<SaleOrder> findAll() throws DataAccessException;
 
