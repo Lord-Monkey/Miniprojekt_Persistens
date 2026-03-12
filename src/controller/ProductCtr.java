@@ -17,11 +17,11 @@ public class ProductCtr {
 	}
 	
 	//Methods
-	public Product findProduct(int productNumber) {
+	public Product findProduct(int productNumber) throws DataAccessException {
 		return prdb.findProduct(productNumber);
 	}
 	
-	public List<Product> findAllProducts() {
+	public List<Product> findAllProducts() throws DataAccessException {
 		return prdb.findAll();
 	}
 }
