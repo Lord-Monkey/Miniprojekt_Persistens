@@ -3,6 +3,7 @@ package db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.SaleOrder;
@@ -44,7 +45,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	}
 	
 	private List<SaleOrder> buildObjects(ResultSet rs) throws SQLException {
-		List<SaleOrder> foundSaleOrder = new java.util.ArrayList<SaleOrder>();
+		List<SaleOrder> foundSaleOrder = new ArrayList<SaleOrder>();
 		SaleOrder tempSaleOrder = null;
 		while(rs.next()) {
 			tempSaleOrder = buildObject(rs);
