@@ -6,7 +6,7 @@ import model.OrderLineItem;
 
 public interface OrderLineItemDBIF {
 	
-	Boolean insert(OrderLineItem ol) throws DataAccessException;
+	Boolean insert(OrderLineItem ol, int orderNo) throws DataAccessException;
 	
 	List<OrderLineItem> findAll() throws DataAccessException;
 
