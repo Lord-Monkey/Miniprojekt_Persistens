@@ -88,7 +88,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 				List<OrderLineItem> oli = oliDB.findOrderLinesByOrderNo(orderNo);
 				
 				so.setOrderNo(orderNo);
-				so.setDate(deliveryDate);
+				so.setDate(date);
 				so.setDeliveryStatus(deliveryStatus);
 				so.setDeliveryDate(deliveryDate);
 				so.setDiscountGiven(discountGiven);
