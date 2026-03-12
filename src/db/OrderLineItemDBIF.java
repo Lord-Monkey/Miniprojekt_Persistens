@@ -9,6 +9,6 @@ public interface OrderLineItemDBIF {
 	
 	Boolean insert(OrderLineItem ol, int orderNo) throws DataAccessException;
 	
-	List<OrderLineItem> findOrderLinesByOrderNo(SaleOrder orderNo) throws DataAccessException;
+	List<OrderLineItem> findOrderLinesByOrderNo(int orderNo) throws DataAccessException;
 
 }
