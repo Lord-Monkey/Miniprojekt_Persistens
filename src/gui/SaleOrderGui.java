@@ -11,7 +11,6 @@ import db.DataAccessException;
 import model.SaleOrder;
 
 import java.awt.BorderLayout;
-import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -19,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JTable;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
