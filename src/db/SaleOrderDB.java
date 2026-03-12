@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Employee;
 import model.SaleOrder;
+import model.Vehicle;
 
 /**
  * {@link SalesOrderDB} is a class that 
@@ -17,11 +19,11 @@ import model.SaleOrder;
 public class SaleOrderDB implements SaleOrderDBIF {
 	
 	private static final String FIND_ALL_Q = "select orderNo, date, deliveryStatus, deliveryDate,"
-			+ " discountGiven, c, orderLines from SaleOrder ";
+			+ " discountGiven, c, orderLineItem from SaleOrder ";
 	private PreparedStatement findAllPS;
 	
 	private static final String INSERT_Q = "insert into SaleOrder(orderNo, date, deliveryStatus,"
-			+ " deliveryDate, discountGiven, c, orderLines)";
+			+ " deliveryDate, discountGiven, c, orderLineItem)";
 	private PreparedStatement INSERT_PS;
 	
 	public SaleOrderDB() throws DataAccessException{
@@ -54,9 +56,47 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		return foundSaleOrder;
 	}
 	
-	private SaleOrder buildObject(ResultSet rs) {
-		
+	private SaleOrder buildObject(ResultSet rs, boolean fullAssociation) throws DataAccessException{
+		SaleOrder so = null;
+		try {
+			if(rs.next()) {
+				so = new SaleOrder(
+						rs.getInt("id"),
+						rs.getDate("date").toLocalDate(),
+						rs.getBoolean("deliveryStatus"),
+						rs.getDate("deliveryDate").toLocalDate(),
+						rs.getBoolean("discountGiven"),
+						rs.getString("c"),
+						rs.getFloat("orderLineItem")
+						);
+				if(fullAssociation) {
+					List<SaleOrder> saleOrders = saleOrderDBIF.findOrderByOrderNo();
+				}
+			}
 	}
+	
+	private Employee buildObject(ResultSet rs, boolean fullAssociation) throws DataAccessException {
+		Employee e = null;
+		try {
+			if(rs.next()) {
+				e = new Employee(
+						rs.getInt("id"),
+						rs.getString("initials"),
+						rs.getString("fname"),
+						rs.getString("lname"),
+						rs.getDate("employmentdate").toLocalDate()
+						);
+				if(fullAssociation) {
+					List<Vehicle> vehicles = vehicleDao.findByEmployeeId(e.getId());
+					e.setVehicles(vehicles);
+				}
+			}
+		} catch (SQLException e1) {
+			throw new DataAccessException("Could not read result set for employee", e1);
+		}
+		return e;
+	}
+
 	
 	public boolean insert(SaleOrder so) {
 		

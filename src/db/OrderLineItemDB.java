@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import model.OrderLineItem;
 import model.Product;
+import model.SaleOrder;
 
 public class OrderLineItemDB implements OrderLineItemDBIF {
 	//Fields
@@ -49,7 +50,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	}
 
 	@Override
-	public List<OrderLineItem> findAll() throws DataAccessException {
+	public List<OrderLineItem> findOrderLinesByOrderNo(SaleOrder orderNo) throws DataAccessException {
 		ResultSet rs;
 		try {
 			rs = findAllPS.executeQuery();
