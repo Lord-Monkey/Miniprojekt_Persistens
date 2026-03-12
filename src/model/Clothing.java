@@ -30,7 +30,9 @@ public class Clothing extends Product{
 	     */
 		public Clothing(int productNumber, String name, int minStock, 
 				int reserveQty, String size, String colour) {
-			
+			super(productNumber, name, minStock, reserveQty);
+			this.size = size;
+			this.colour = colour;
 		}
 
 	    /**
