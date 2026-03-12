@@ -55,6 +55,7 @@ public class MainGui extends JFrame {
 		btnOrders.setMargin(new Insets(2, 31, 2, 31));
 		btnOrders.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				openOrders();
 			}
 		});
 		
@@ -77,4 +78,7 @@ public class MainGui extends JFrame {
 
 	}
 
+	private void openOrders() {
+		
+	}
 }
