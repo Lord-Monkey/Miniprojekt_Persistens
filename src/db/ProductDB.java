@@ -21,12 +21,12 @@ import model.ProductTypeEnumHelper;
 public class ProductDB implements ProductDBIF {
 
 	private static final String FIND_ALL_Q =
-			"select pro.id, type, productNumber, name, minStock, reservedStock, from Product pro"
-					+ "LEFT JOIN GunReplica gun on gun.ID = pro.ID"
-					+ "LEFT JOIN Equipment equip on equip.ID = pro.ID"
-					+ "LEFT JOIN Clothing cloth on cloth.ID = pro.ID";
+			"select * from Product "
+					+ "LEFT JOIN GunReplica on Product.id = GunReplica.id "
+					+ "LEFT JOIN Equipment on Product.id = Equipment.id "
+					+ "LEFT JOIN Clothing on Product.id = Clothing.id ";
 	private static final String FIND_BY_PRODUCTNUMBER =
-			FIND_ALL_Q + "where pro.id = ?";
+			FIND_ALL_Q + "where product.id = ?";
 	private PreparedStatement findAllPS, findByPN;
 
 	public ProductDB() throws DataAccessException {

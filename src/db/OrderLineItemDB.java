@@ -74,7 +74,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	private OrderLineItem buildObject(ResultSet rs) throws SQLException, DataAccessException {
 		Product p;
 		int quantity;
-		int productNumber = rs.getInt("productNumber");
+		int productNumber = rs.getInt("productId");
 		quantity = rs.getInt("quantity");
 		p = productDB.findProduct(productNumber);
 		OrderLineItem oli = new OrderLineItem(p, quantity);

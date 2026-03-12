@@ -4,6 +4,7 @@ public abstract class Product {
 	
 	//Fields
 	private int productNumber;
+	private ProductTypeEnum ptEnum;
 	private String name;
 	private int minStock;
 	private int reserveQty;

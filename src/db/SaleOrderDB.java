@@ -32,7 +32,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	private PreparedStatement INSERT_PS;
 	
 	private static final String FIND_BY_ORDERNO_Q = "SELECT orderNo, orderDate, deliveryStatus, deliveryDate,"
-			+ " discountGiven, mail FROM SaleOrder WHERE orderNo = ?";
+			+ " discountGiven, mail FROM SaleOrder, customer WHERE orderNo = ?";
 	
 	private PreparedStatement findOrderNoPS;
 	
@@ -79,7 +79,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			if(rs.next()) {
 				so = new SaleOrder();
 				int orderNo = rs.getInt("orderNo");
-				LocalDate date = rs.getDate("date").toLocalDate();
+				LocalDate date = rs.getDate("orderDate").toLocalDate();
 				String deliveryStatus = rs.getString("deliveryStatus");
 				LocalDate deliveryDate = rs.getDate("deliveryDate").toLocalDate();
 				boolean discountGiven = rs.getBoolean("discountGiven");
