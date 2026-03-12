@@ -21,7 +21,7 @@ import model.ProductTypeEnumHelper;
 public class ProductDB implements ProductDBIF {
 
 	private static final String FIND_ALL_Q =
-			"select type, productNumber, name, minStock, reservedStock, from Product"
+			"select pro.id, type, productNumber, name, minStock, reservedStock, from Product pro"
 					+ "LEFT JOIN GunReplica gun on gun.ID = pro.ID"
 					+ "LEFT JOIN Equipment equip on equip.ID = pro.ID"
 					+ "LEFT JOIN Clothing cloth on cloth.ID = pro.ID";

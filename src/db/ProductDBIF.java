@@ -6,6 +6,6 @@ import model.Product;
 
 public interface ProductDBIF {
 
-	public Product findProduct(int productNumber);
-	public List<Product> findAll();
+	public Product findProduct(int productNumber) throws DataAccessException;
+	public List<Product> findAll() throws DataAccessException;
 }
