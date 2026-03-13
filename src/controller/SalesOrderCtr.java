@@ -14,6 +14,7 @@ public class SalesOrderCtr {
 	private ProductCtr pctr;
 	private SaleOrder so;
 	private SaleOrderDBIF sodb;
+	private Customer c;
 	
 	//Constructor
 	public SalesOrderCtr() throws DataAccessException {
@@ -28,7 +29,7 @@ public class SalesOrderCtr {
 	}
 	
 	public Customer enterCustomer(String mail) throws DataAccessException {
-		return cctr.findCustomer(mail);
+		return c = cctr.findCustomer(mail);
 	}
 	
 	public Product enterProduct(int productNumber, int quantity) throws DataAccessException {
@@ -45,5 +46,9 @@ public class SalesOrderCtr {
 	
 	public SaleOrder findByOrderNo(int orderNo) throws DataAccessException {
 		return so = sodb.findOrderByOrderNo(orderNo);
+	}
+	
+	public void finaliseSaleOrder() {
+		so.setCustomer(c);
 	}
 }
