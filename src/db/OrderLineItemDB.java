@@ -30,6 +30,13 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 			throw new DataAccessException("Couldn't connect to database", e);
 		}
 	}
+	
+	//Constructor for testing purposes
+	OrderLineItemDB(PreparedStatement findAllPS, PreparedStatement insertPS, ProductDBIF productDB) {
+	    this.findAllPS = findAllPS;
+	    this.INSERT_PS = insertPS;
+	    this.productDB = productDB;
+	}
 
 	@Override
 	public Boolean insert(OrderLineItem oli, int orderNo) throws DataAccessException {
