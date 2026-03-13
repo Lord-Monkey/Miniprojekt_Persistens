@@ -42,4 +42,8 @@ public class SalesOrderCtr {
 	public List<SaleOrder> findAll() throws DataAccessException {
 		return sodb.findAll();
 	}
+	
+	public SaleOrder findByOrderNo(int orderNo) throws DataAccessException {
+		return so = sodb.findOrderByOrderNo(orderNo);
+	}
 }
