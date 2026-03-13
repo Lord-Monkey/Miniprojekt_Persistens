@@ -19,9 +19,9 @@ public class Clothing extends Product{
 			super();
 		}
 		
-		public Clothing(int productNumber, String name, int minStock, 
+		public Clothing(int productNumber, ProductTypeEnum ptEnum, String name, int minStock, 
 				int reserveQty, String size, String colour) {
-			super(productNumber, name, minStock, reserveQty);
+			super(productNumber, ptEnum, name, minStock, reserveQty);
 			this.size = size;
 			this.colour = colour;
 		}
