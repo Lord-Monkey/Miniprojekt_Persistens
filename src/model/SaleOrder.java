@@ -1,5 +1,11 @@
 package model;
-
+/**
+ * {@link SaleOrder} Represents a sales order in the system.
+ * 
+ * A SaleOrder contains information about the order number, order date,
+ * delivery status, delivery date, discount status, the associated customer,
+ * and the list of order line items included in the order.
+ */
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
