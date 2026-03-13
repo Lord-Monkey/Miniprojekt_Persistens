@@ -38,7 +38,6 @@ public class NewSaleGui extends JFrame {
 	private JButton btnCustomer;
 	private JLabel lblShowCustomer;
 	private Customer customer;
-	private JTable table;
 	private SalesOrderCtr soc;
 	private Product product;
 	private JList<OrderLineItem> orderLineItemList;
@@ -82,6 +81,11 @@ public class NewSaleGui extends JFrame {
 		panel_South.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
 		JButton btnCreate = new JButton("Opret");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createSale();
+			}
+		});
 		btnCreate.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_South.add(btnCreate);
 
@@ -126,17 +130,13 @@ public class NewSaleGui extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
-
 		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane);
 		orderLineItemList = new JList<>();
 		orderLineItemList.setCellRenderer(new OrderLineItemListCellRenderer());
 		scrollPane.setViewportView(orderLineItemList);
-		panel_1.add(scrollPane);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-
-		updateOrderLineItemList();
+		init();
 	}
 
 	private void addCustomerToSale() {
@@ -156,26 +156,7 @@ public class NewSaleGui extends JFrame {
 
 	private void createSale() {
 		// Checks if a customer have been added to the offer
-		if (lblShowCustomer.getText().equals("Ingen kunde valgt")) {
-			javax.swing.JOptionPane.showMessageDialog(
-					this,
-					"Tilføj venligst en kunde til tilbuddet",
-					"Manglende kunde",
-					javax.swing.JOptionPane.WARNING_MESSAGE
-					);
-			return;
-		}
-
-		// Checks if at least one product have been added to the offer
-		else if (table.getRowCount() == 0) {
-			javax.swing.JOptionPane.showMessageDialog(
-					this,
-					"Tilføj venligst mindst ét produkt til tilbuddet",
-					"Manglende produkt",
-					javax.swing.JOptionPane.WARNING_MESSAGE
-					);
-			return;
-		}
+		soc.finaliseSaleOrder();
 
 	}
 
@@ -221,6 +202,10 @@ public class NewSaleGui extends JFrame {
 
 	}
 
+	private void init() {orderLineItemList.setCellRenderer(new OrderLineItemListCellRenderer());
+	updateOrderLineItemList();
+
+	}
 	private void updateOrderLineItemList() {
 		if (customer != null) {
 			List<OrderLineItem> olii = soc.getOrderLines();

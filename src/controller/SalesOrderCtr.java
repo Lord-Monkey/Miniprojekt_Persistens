@@ -55,6 +55,12 @@ public class SalesOrderCtr {
 	
 	public void finaliseSaleOrder() {
 		so.setCustomer(c);
+		try {
+			sodb.insert(so);
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public List<OrderLineItem> getOrderLines(){
