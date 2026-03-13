@@ -1,5 +1,7 @@
 package model;
-
+/**
+ * Helper class for creating {@link ProductTypeEnum} values from strings.
+ */
 public class ProductTypeEnumHelper {
 
 	public ProductTypeEnum buildEnum(String enumString) {
