@@ -5,7 +5,7 @@ package model;
  * 
  * It adds gunReplica-specific attributes such as caliber and material to the generic product information.
  * 
- * @author Lau Jul Jensen, Nikolaj Grønhøj Thimm, Christian Nordentoft
+ * @author Lau, Thimm, Christian
  * @version 11-3-2026
  */
 public class GunReplica extends Product{

@@ -1,5 +1,11 @@
 package db;
-
+/**
+ * Singleton for managing a database connection.
+ * Supports getConnection(), transactions, and disconnect.
+ * 
+ * @author Lau, Aksel
+ * @version 11-3-2026
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

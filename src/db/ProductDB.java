@@ -14,9 +14,12 @@ import model.ProductTypeEnum;
 import model.ProductTypeEnumHelper;
 
 /**
- * Sends queries to the database and gets a ResultSet back
- * Uses prepared statements to execute queries
- * Also implements methods to build new product object through the model layer
+ * Handles database operations for {@link Product} objects.
+ * Supports finding a {@link Product} by product number and retrieving all {@link Product}.
+ * Builds instances of Clothing, Equipment, and GunReplica based on database type.
+ * 
+ * @author Mathias, Lau
+ * @version 11-3-2026
  */
 public class ProductDB implements ProductDBIF {
 

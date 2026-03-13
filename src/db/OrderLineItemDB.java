@@ -1,5 +1,11 @@
 package db;
-
+/**
+ * Handles database operations for {@link OrderLineItem} objects.
+ * Supports inserting and retrieving {@link OrderLineItem} by order number.
+ * 
+ * @author Lau
+ * @version 11-3-2026
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

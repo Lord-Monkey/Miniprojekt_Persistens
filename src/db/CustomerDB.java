@@ -1,11 +1,19 @@
 package db;
-
+/**
+ * {@link CustomerDB} is a Database access class that retrieves customer data from the database and converts
+ * the returned ResultSet into {@link Customer} objects.
+ * 
+ * Provides methods to find a {@link Customer} by email and 
+ * retrieve all {@link Customer} from the database. 	
+ * 
+ * @author Aksel, Lau
+ * @version 11-3-2026
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Customer;
 
 public class CustomerDB implements CustomerDBIF {

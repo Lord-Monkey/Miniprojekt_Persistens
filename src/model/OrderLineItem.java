@@ -6,7 +6,7 @@ package model;
  * An OrderLineItem contains a {@link Product} and the quantity of that product
  * included in the order.
  * 
- * @author Lau Jul Jensen, Aksel Kjeldahl Larsen, Christian Nordentoft
+ * @author Lau, Aksel, Christian
  * @version 11-3-2026
  */
 public class OrderLineItem {

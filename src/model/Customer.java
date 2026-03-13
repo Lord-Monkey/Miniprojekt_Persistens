@@ -3,7 +3,7 @@ package model;
  * {@link Customer} is a class that provides getter and setter methods for accessing
  * and updating customer attributes.
  * 
- * @author Christian Nordentoft
+ * @author Christian
  * @version 11-3-2026
  */
 public class Customer {

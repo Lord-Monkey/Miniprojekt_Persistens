@@ -5,6 +5,9 @@ package model;
  * A SaleOrder contains information about the order number, order date,
  * delivery status, delivery date, discount status, the associated customer,
  * and the list of order line items included in the order.
+ * 
+ * @author Lau, Aksel
+ * @version 11-3-2026
  */
 import java.time.LocalDate;
 import java.util.ArrayList;

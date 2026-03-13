@@ -5,7 +5,7 @@ package model;
  * 
  * It adds clothing-specific attributes such as size and colour to the generic product information.
  * 
- * @author Nikolaj Grønhøj Thimm, Christian Nordentoft
+ * @author Thimm, Christian
  * @version 11-3-2026
  */
 public class Clothing extends Product{

@@ -13,9 +13,12 @@ import model.OrderLineItem;
 import model.SaleOrder;
 
 /**
- * {@link SalesOrderDB} is a class that 
+ * Handles database operations for {@link SaleOrder} objects.
+ * Supports inserting {@link SaleOrder}, finding all {@link SaleOrder}, and finding {@link SaleOrder} by order number.
+ * Builds {@link SaleOrder} instances with associated {@link Customer} and {@link OrderLineItem} objects.
  * 
- * @author Christian Nordentoft
+ * 
+ * @author Christian, Thimm
  * @version 11-3-2026
  */
 public class SaleOrderDB implements SaleOrderDBIF {

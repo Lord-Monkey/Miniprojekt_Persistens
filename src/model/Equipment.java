@@ -5,7 +5,7 @@ package model;
  * 
  * It adds equipment-specific attributes such as material and style to the generic product information.
  * 
- * @author Lau Jul Jensen, Nikolaj Grønhøj Thimm, Christian Nordentoft
+ * @author Lau, Thimm, Christian
  * @version 11-3-2026
  */
 public class Equipment extends Product{

@@ -1,6 +1,9 @@
 package model;
 /**
  * Helper class for creating {@link ProductTypeEnum} values from strings.
+ * 
+ * @author Mathias
+ * @version 11-3-2026
  */
 public class ProductTypeEnumHelper {
 
