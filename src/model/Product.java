@@ -10,8 +10,9 @@ public abstract class Product {
 	private int reserveQty;
 	
 	//Constructors
-	public Product(int productNumber, String name, int minStock, int reserveQty){
+	public Product(int productNumber, ProductTypeEnum ptEnum, String name, int minStock, int reserveQty){
 		this.productNumber = productNumber;
+		this.ptEnum = ptEnum;
 		this.name = name;
 		this.minStock = minStock;
 		this.reserveQty = reserveQty;
@@ -28,6 +29,14 @@ public abstract class Product {
 
 	public void setProductNumber(int productNumber) {
 		this.productNumber = productNumber;
+	}
+	
+	public ProductTypeEnum getPtEnum() {
+		return ptEnum;
+	}
+	
+	public void setPtEnum(ProductTypeEnum ptEnum) {
+		this.ptEnum = ptEnum;
 	}
 
 	public String getName() {
