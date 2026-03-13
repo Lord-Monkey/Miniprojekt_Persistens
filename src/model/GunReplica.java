@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * {@link GunReplica} is a subclass of {@link Product} that represents a gunReplica product.
+ * 
+ * It adds gunReplica-specific attributes such as caliber and material to the generic product information.
+ * 
+ * @author Lau Jul Jensen, Nikolaj Grønhøj Thimm, Christian Nordentoft
+ * @version 11-3-2026
+ */
 public class GunReplica extends Product{
 
 	//Fields

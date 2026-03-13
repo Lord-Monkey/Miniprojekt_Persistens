@@ -1,5 +1,15 @@
 package model;
 
+/**
+ * {@link Product} Represents a generic product in the system.
+ * 
+ * A product contains basic information such as product number, name,
+ * minimum stock level, and reserved quantity. This class is abstract
+ * and is intended to be extended by specific product types.
+ * 
+ * @author Lau Jul Jensen, Nikolaj Grønhøj Thimm, Christian Nordentoft
+ * @version 11-3-2026
+ */
 public abstract class Product {
 	
 	//Fields

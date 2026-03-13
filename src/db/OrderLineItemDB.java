@@ -17,7 +17,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productID, orderID) values "
 			+ "(?, "
 			+ "(SELECT id FROM Product WHERE productNumber = ?), "
-			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?)";
+			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?))";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
 
@@ -29,6 +29,13 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 		} catch (Exception e) {
 			throw new DataAccessException("Couldn't connect to database", e);
 		}
+	}
+	
+	//Constructor for testing purposes
+	OrderLineItemDB(PreparedStatement findAllPS, PreparedStatement insertPS, ProductDBIF productDB) {
+	    this.findAllPS = findAllPS;
+	    this.INSERT_PS = insertPS;
+	    this.productDB = productDB;
 	}
 
 	@Override
