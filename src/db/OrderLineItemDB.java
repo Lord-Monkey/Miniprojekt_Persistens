@@ -17,7 +17,7 @@ public class OrderLineItemDB implements OrderLineItemDBIF {
 	private static final String INSERT_Q = "INSERT INTO OrderLineItem (quantity, productID, orderID) values "
 			+ "(?, "
 			+ "(SELECT id FROM Product WHERE productNumber = ?), "
-			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?)";
+			+ "(SELECT id FROM SaleOrder WHERE orderNO = ?))";
 	private PreparedStatement INSERT_PS;
 	private ProductDBIF productDB;
 
