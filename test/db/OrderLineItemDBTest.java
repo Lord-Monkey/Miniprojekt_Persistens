@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-
 import model.OrderLineItem;
-import model.Clothing;
+import model.Product;
 
 public class OrderLineItemDBTest {
 
@@ -14,15 +13,9 @@ public class OrderLineItemDBTest {
     void testInsertReturnsTrue() throws DataAccessException {
         // Arrange
         OrderLineItemDB db = new OrderLineItemDB();
-        Clothing ct = new Clothing(); 
-        ct.setColour("Blue");
-        ct.setSize("M");
-        ct.setProductNumber(5);
-        ct.setName("Blue shirt");
-        ct.setMinStock(10);
-        ct.setReserveQty(5);
-        ct.setPtEnum(model.ProductTypeEnum.CLOTHING);
-        OrderLineItem oli = new OrderLineItem(ct, 3);
+        ProductDB pdb = new ProductDB();
+        Product p = pdb.findProduct(5);
+        OrderLineItem oli = new OrderLineItem(p, 3);
         int orderNo = 1;
 
         // Act
