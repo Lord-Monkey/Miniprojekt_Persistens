@@ -69,7 +69,7 @@ public class AddProduct extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				selectedProduct = productList.getSelectedValue();
 				otherPage.setProduct(selectedProduct);
-				
+				dispose();
 			}
 		});
 		panel.add(btnAdd);

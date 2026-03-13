@@ -6,15 +6,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import java.util.List;
+
 import controller.SalesOrderCtr;
 import db.DataAccessException;
 import model.Customer;
+import model.OrderLineItem;
 import model.Product;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -22,6 +26,8 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -35,6 +41,7 @@ public class NewSaleGui extends JFrame {
 	private JTable table;
 	private SalesOrderCtr soc;
 	private Product product;
+	private JList<OrderLineItem> orderLineItemList;
 
 	/**
 	 * Launch the application.
@@ -114,19 +121,22 @@ public class NewSaleGui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				addProductToSale();
-			}
-		});
+			}});
 		panel.add(btnProduct, "cell 0 2");
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 
 		JScrollPane scrollPane = new JScrollPane();
+		orderLineItemList = new JList<>();
+		orderLineItemList.setCellRenderer(new OrderLineItemListCellRenderer());
+		scrollPane.setViewportView(orderLineItemList);
 		panel_1.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
+		updateOrderLineItemList();
 	}
 
 	private void addCustomerToSale() {
@@ -182,12 +192,43 @@ public class NewSaleGui extends JFrame {
 	}
 	public void setProduct(Product product) {
 		this.product = product;
+		int quantity = 0;
+		while(quantity == 0) {
+			String qtyStr = JOptionPane.showInputDialog(this,"Ønsket antal af " + product.getName(), "Antal", JOptionPane.QUESTION_MESSAGE);
+			if (qtyStr == null) return;
+
+			try {
+				int tempqty = Integer.parseInt(qtyStr);
+				if (tempqty <= 0) throw new NumberFormatException();
+				else {
+					quantity = tempqty;
+				}
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(this, "Antal skal være et positivt tal over 0!");
+			}
+		}
+		if(product != null) {
+			soc.addOrderLine(product, quantity);
+		}
 	}
 
-	public void addProductToSale() {
+	public AddProduct addProductToSale() {
 		AddProduct addProduct = new AddProduct(this);
 		addProduct.setLocation(400, 400);
 		addProduct.setVisible(true);
+		return addProduct;
 
+
+	}
+
+	private void updateOrderLineItemList() {
+		if (customer != null) {
+			List<OrderLineItem> olii = soc.getOrderLines();
+			DefaultListModel<OrderLineItem> dlm = new DefaultListModel<>();
+			for(OrderLineItem oli : olii) {
+				dlm.addElement(oli);
+			}
+			this.orderLineItemList.setModel(dlm);
+		}
 	}
 }

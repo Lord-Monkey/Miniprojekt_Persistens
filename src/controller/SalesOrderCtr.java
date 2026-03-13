@@ -26,7 +26,7 @@ public class SalesOrderCtr {
 	
 	//Methods
 	public SaleOrder createSaleOrder() throws DataAccessException {
-		return new SaleOrder();
+		return so = new SaleOrder();
 	}
 	
 	public Customer enterCustomer(String mail) throws DataAccessException {
@@ -55,5 +55,9 @@ public class SalesOrderCtr {
 	
 	public void finaliseSaleOrder() {
 		so.setCustomer(c);
+	}
+	
+	public List<OrderLineItem> getOrderLines(){
+		return so.getOrderLines();
 	}
 }
