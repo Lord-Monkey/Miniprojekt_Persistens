@@ -28,7 +28,7 @@ public class AddCustomer extends JFrame {
 	private Customer selectedCustomer;
 	private JList<Customer> customerList;
 	private CustomerCtr cctr;
-
+	private NewSaleGui otherPage;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +36,7 @@ public class AddCustomer extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddCustomer frame = new AddCustomer();
+					AddCustomer frame = new AddCustomer(null);
 					frame.setVisible(true);
 					
 					Customer chosen = frame.getSelectedCustomer();
@@ -55,7 +55,8 @@ public class AddCustomer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddCustomer() {
+	public AddCustomer(NewSaleGui nsg) {
+		otherPage = nsg;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -87,6 +88,7 @@ public class AddCustomer extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				selectedCustomer = customerList.getSelectedValue();
+				otherPage.setCustomer(selectedCustomer);
 				dispose();
 			}
 		});
