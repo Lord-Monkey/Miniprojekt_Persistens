@@ -6,7 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.SalesOrderCtr;
+import db.DataAccessException;
 import model.Customer;
+import model.Product;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -30,6 +33,8 @@ public class NewSaleGui extends JFrame {
 	private JLabel lblShowCustomer;
 	private Customer customer;
 	private JTable table;
+	private SalesOrderCtr soc;
+	private Product product;
 
 	/**
 	 * Launch the application.
@@ -57,55 +62,74 @@ public class NewSaleGui extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
+		try {
+			soc = new SalesOrderCtr();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		JPanel panel_South = new JPanel();
 		contentPane.add(panel_South, BorderLayout.SOUTH);
 		panel_South.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-		
+
 		JButton btnCreate = new JButton("Opret");
 		btnCreate.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_South.add(btnCreate);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			dispose();
+				dispose();
 			}
 		});
 		btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_South.add(btnCancel);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.EAST);
 		panel.setLayout(new MigLayout("", "[]", "[][][]"));
-		
+
 		btnCustomer = new JButton("Tilføj kunde");
 		btnCustomer.setMargin(new Insets(2, 18, 2, 19));
 		btnCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addCustomerToOffer();
+				try {
+					soc.createSaleOrder();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				addCustomerToSale();
 			}
 		});
-		
+
 		lblShowCustomer = new JLabel("Ingen kunde valgt");
 		panel.add(lblShowCustomer, "cell 0 0");
 		panel.add(btnCustomer, "cell 0 1");
-		
+
 		JButton btnProduct = new JButton("Tilføj produkt");
+		btnProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				addProductToSale();
+			}
+		});
 		panel.add(btnProduct, "cell 0 2");
-		
+
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		panel_1.add(scrollPane);
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
 	}
 
-	private void addCustomerToOffer() {
+	private void addCustomerToSale() {
 		AddCustomer addCustomer = new AddCustomer(this);
 		addCustomer.setLocation(400, 400);
 		addCustomer.setVisible(true);
@@ -119,7 +143,7 @@ public class NewSaleGui extends JFrame {
 			System.out.println("Ingen kunde valgt");
 		}
 	}
-	
+
 	private void createSale() {
 		// Checks if a customer have been added to the offer
 		if (lblShowCustomer.getText().equals("Ingen kunde valgt")) {
@@ -143,11 +167,27 @@ public class NewSaleGui extends JFrame {
 			return;
 		}
 
-		
 	}
-	
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 		lblShowCustomer.setText(customer.getName() + " (" + customer.getMail() + ")");
+		try {
+			soc.enterCustomer(customer.getMail());
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public void addProductToSale() {
+		AddProduct addProduct = new AddProduct(this);
+		addProduct.setLocation(400, 400);
+		addProduct.setVisible(true);
+
 	}
 }

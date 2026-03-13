@@ -5,6 +5,7 @@ import db.SaleOrderDB;
 import db.SaleOrderDBIF;
 import db.DataAccessException;
 import model.Customer;
+import model.OrderLineItem;
 import model.Product;
 import model.SaleOrder;
 
@@ -46,6 +47,10 @@ public class SalesOrderCtr {
 	
 	public SaleOrder findByOrderNo(int orderNo) throws DataAccessException {
 		return so = sodb.findOrderByOrderNo(orderNo);
+	}
+	
+	public void addOrderLine(Product p, int quantity) {
+		so.addOrderLine(p, quantity);
 	}
 	
 	public void finaliseSaleOrder() {
