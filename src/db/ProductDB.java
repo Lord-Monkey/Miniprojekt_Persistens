@@ -102,6 +102,7 @@ public class ProductDB implements ProductDBIF {
 				product.setReserveQty(reservedStock);
 				product.setColour(colour);
 				product.setSize(size);
+				product.setPtEnum(ptEnum);
 				end = product;
 			} 
 			else if(ptEnum.equals(pteh.buildEnum("EQUIPMENT"))) {
@@ -114,6 +115,7 @@ public class ProductDB implements ProductDBIF {
 				product.setReserveQty(reservedStock);
 				product.setMaterial(material);
 				product.setStyle(style);
+				product.setPtEnum(ptEnum);
 				end = product;
 			} 
 			else if(ptEnum.equals(pteh.buildEnum("GUNREPLICA"))) {
@@ -126,6 +128,7 @@ public class ProductDB implements ProductDBIF {
 				product.setReserveQty(reservedStock);
 				product.setCaliber(caliber);
 				product.setMaterial(material);
+				product.setPtEnum(ptEnum);
 				end = product;
 			}
 
