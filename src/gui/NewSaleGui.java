@@ -106,7 +106,7 @@ public class NewSaleGui extends JFrame {
 	}
 
 	private void addCustomerToOffer() {
-		AddCustomer addCustomer = new AddCustomer();
+		AddCustomer addCustomer = new AddCustomer(this);
 		addCustomer.setLocation(400, 400);
 		addCustomer.setVisible(true);
 
@@ -144,5 +144,10 @@ public class NewSaleGui extends JFrame {
 		}
 
 		
+	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+		lblShowCustomer.setText(customer.getName() + " (" + customer.getMail() + ")");
 	}
 }

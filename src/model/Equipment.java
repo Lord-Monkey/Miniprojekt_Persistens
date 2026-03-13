@@ -19,9 +19,9 @@ public class Equipment extends Product{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Equipment(int productNumber, String name, int minStock, int reserveQty,
+	public Equipment(int productNumber,ProductTypeEnum ptEnum, String name, int minStock, int reserveQty,
 			String material, String style) {
-		super(productNumber, name, minStock, reserveQty);
+		super(productNumber, ptEnum, name, minStock, reserveQty);
 		this.material = material;
 		this.style = style;
 	}
