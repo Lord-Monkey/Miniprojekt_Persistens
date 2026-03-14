@@ -157,6 +157,7 @@ public class NewSaleGui extends JFrame {
 	private void createSale() {
 		// Checks if a customer have been added to the offer
 		soc.finaliseSaleOrder();
+		dispose();
 
 	}
 
@@ -206,7 +207,7 @@ public class NewSaleGui extends JFrame {
 	updateOrderLineItemList();
 
 	}
-	private void updateOrderLineItemList() {
+	public void updateOrderLineItemList() {
 		if (customer != null) {
 			List<OrderLineItem> olii = soc.getOrderLines();
 			DefaultListModel<OrderLineItem> dlm = new DefaultListModel<>();

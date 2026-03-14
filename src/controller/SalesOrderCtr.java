@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import db.SaleOrderDB;
 import db.SaleOrderDBIF;
@@ -55,6 +56,16 @@ public class SalesOrderCtr {
 	
 	public void finaliseSaleOrder() {
 		so.setCustomer(c);
+		LocalDate date = LocalDate.now();
+		so.setDate(date);
+		int tempDelivery = date.getDayOfYear();
+		tempDelivery += 7;
+		LocalDate ddate = LocalDate.ofYearDay(date.getYear(), tempDelivery);
+		so.setDeliveryDate(ddate);
+		so.setDeliveryStatus("Igangværende");
+		so.setDiscountGiven(false);
+		int orderNo = sodb.getNewOrderNumber();
+		so.setOrderNo(orderNo);
 		try {
 			sodb.insert(so);
 		} catch (DataAccessException e) {

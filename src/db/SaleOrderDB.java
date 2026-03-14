@@ -115,12 +115,12 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			INSERT_PS.setDate(4, Date.valueOf(so.getDeliveryDate()));
 			INSERT_PS.setBoolean(5, so.getDiscountGiven());
 			INSERT_PS.setString(6, so.getCustomer().getMail());
-			for(OrderLineItem oli : so.getOrderLines()) {
-				oliDB.insert(oli, so.getOrderNo());
-			}
 			int res = INSERT_PS.executeUpdate();
 			if(res > 0) {
 				result = true;
+				for(OrderLineItem oli : so.getOrderLines()) {
+				oliDB.insert(oli, so.getOrderNo());
+			}
 			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Couldn't insert order", e);
@@ -143,4 +143,23 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			throw new DataAccessException("Couldn't find all saleorders", e);
 		}
 	}
+	
+	public int getNewOrderNumber() {
+		ResultSet rs;
+		int orderNoFound = -1;
+		try {
+			PreparedStatement findOrderNumber = DBConnection.getInstance().getConnection().prepareStatement("Select orderNo from SaleOrder");
+			rs = findOrderNumber.executeQuery();
+			while(rs.next()) {
+			orderNoFound = rs.getInt("orderNo");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(orderNoFound != -1) {
+			orderNoFound += 1;
+		}
+		return orderNoFound;
+	}	
 }

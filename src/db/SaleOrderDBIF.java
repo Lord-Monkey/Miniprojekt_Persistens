@@ -20,4 +20,6 @@ public interface SaleOrderDBIF {
 
 	SaleOrder findOrderByOrderNo(int orderNo) throws DataAccessException;
 
+	int getNewOrderNumber();
+
 }
